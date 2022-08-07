@@ -1,0 +1,44 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+   
+}
+#headOfContent{
+    display: flex;
+    flex-wrap: wrap;
+    min-height:30px
+}
+/* resultshow */
+.resultshow{
+    display: none;
+}
+/* mic image */
+.img_mic{
+
+    border-radius:100%;
+    border: 5px solid red;    
+    animation-name: example;
+    animation-duration: 30s;
+    animation-iteration-count: infinite;
+}
+@keyframes example {
+    0%   {border:5px solid rgb(235, 120, 120);}
+    25%  {border:25px solid rgb(98, 98, 171);}
+    50%  {border:50px solid lightblue;}
+    100% {border:75px solid lavender;}
+}
+.animation_bar{
+    width: 0%;
+    animation-name: animation_bar;
+    animation-duration: 30s;
+    animation-iteration-count: infinite;
+
+}
+@keyframes animation_bar {
+    0%   { width: 0%;}
+    25%  { width: 20%;}
+    50%  { width: 50%;}
+    100% { width: 100%;}
+}
+
