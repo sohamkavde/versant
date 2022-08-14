@@ -19,7 +19,7 @@
     border-radius:100%;
     border: 5px solid red;    
     animation-name: example;
-    animation-duration: 30s;
+    animation-duration: 10s;
     animation-iteration-count: infinite;
 }
 @keyframes example {
@@ -31,7 +31,7 @@
 .animation_bar{
     width: 0%;
     animation-name: animation_bar;
-    animation-duration: 30s;
+    animation-duration: 10s;
     animation-iteration-count: infinite;
 
 }
@@ -42,3 +42,16 @@
     100% { width: 100%;}
 }
 
+@media (max-width:980px) {
+    #headOfContent{
+        flex-direction:column-reverse;
+    }
+    .textside{
+        width: 100% !important;
+        min-height: 144px !important;
+        margin-bottom: 50px;
+    }
+    .micside{
+        width: 100% !important; 
+    }
+}
