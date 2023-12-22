@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Online Versant Test - 2022</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- jquery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+    integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+    crossorigin="anonymous"></script>
+  <!-- font awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- local drive -->
+  <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+  <!-- navigation -->
+  <nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Practice Versant Test </a>
+
+      <div>
+        Your test is already started. Click on speak button and repeat the Sentences.
+      </div>
+      </button>
+
+    </div>
+  </nav>
+
+  <!-- big main section -->
+  <section id="headOfContent">
+
+    <!-- showing text -->
+    <div class="d-flex flex-column flex-wrap justify-content-around align-items-center w-50 textside"
+      style="min-height:500px">
+
+      <div class="h-25 w-75 contentone">
+        <p style="font-size:30px;" id="valuey" onclick="speak()">Lets check How Much You are Correct </p>
+        <!-- <p id="other"></p> -->
+      </div>
+      <div class="h-25 w-75 contentone">
+        <button type="button" id="speakbutton" class="btn btn-info text-light" onclick="soham();">Speak <i
+            class="fa-solid fa-play text-light"></i></button>
+        <button type="button" id="speakbutton2" class="btn btn-info text-light">Wait for timer <i
+            class="fa-solid fa-play text-light"></i></button>
+      </div>
+
+      <div class="h-25 w-75 resultshow">
+        <a href="#" id="linkResult" target="_blank" rel="noopener noreferrer">GET YOUR RESULT</a>
+      </div>
+    </div>
+
+
+    <!-- mic -->
+    <div class="d-flex flex-wrap flex-column justify-content-around align-items-center w-50 micside">
+      <b>Timer: <span id="timernumber">20</span></b>
+      <div class="w-50" style="min-height:75%;">
+        <!-- <i class="fa-solid fa-microphone w-100   mb-5" style="border-radius:100%;font-size: 100px;color:brown"></i> -->
+        <img src="mic.webp" alt="mic" class="w-100 rounded-circle mb-5 img_mic">
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped bg-warning progress-bar-animated animation_bar"
+            role="progressbar" style="width: 35%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Result -->
+    <p style="display: none;" id="resultGain">0</p>
+  </section>
+</body>
+
+</html>
+<script>
+  const arrString = [
+    "The beautiful thing about learning is that no one can take it away from you",
+    "The mind is not a vessel to be filled but a fire to be ignited",
+    "A person who never made a mistake never tried anything new",
+    "Never let the fear of striking out stop you from playing the game",
+    "You don't have to be great to start but you have to start to be great",
+    "The way to get started is to quit talking and begin doing.",
+    "There are no shortcuts to any place worth going",
+    "The best way to predict your future is to create it"
+  ];
+  // For ans
+  function start() {
+    var img = document.getElementsByClassName('imgd');
+    img.style.color = "5px";
+  }
+  var cnt = 0;
+  document.getElementById("valuey").innerHTML = arrString[cnt++];
+
+  var num = 20;
+  function reducetime() {
+    if (num == 0) {
+      if (cnt >= arrString.length) {
+        document.getElementById("timernumber").innerHTML = "Done";
+        total_gain();
+        clearInterval(myInterval);
+        return;
+      }
+      document.getElementById('speakbutton').style.display = 'block';
+      document.getElementById('speakbutton2').style.display = 'none';
+      num = 20;
+      document.getElementById("valuey").innerHTML = arrString[cnt++];
+    }
+    num = num - 1;
+    document.getElementById("timernumber").innerHTML = num;
+    // 
+  }
+
+  const myInterval = setInterval(reducetime, 1000);
+
+
+
+
+
+  function speak() {
+    console.log("Hi I am speaking....!");
+    speaks = [{ "name": "soham", "lang": "en-GB" },
+    { "name": "Google UK English Male", "lang": "en-US" }];
+
+    const mes = new SpeechSynthesisUtterance();
+    mes.volume = 1;
+    mes.rate = 1;
+    mes.pitch = 1;
+    mes.text = "You clicked";
+    const voice = speaks[0];
+    // console.log(`voice: ${voice.name} and lang : ${voice.lang}`);    
+    mes.voiceURI = voice.name;
+    mes.lang = voice.lang;
+
+    speechSynthesis.speak(mes);
+
+  }
+
+
+
+
+  // For listenig 
+
+  var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+  var recognition = new SpeechRecognition();
+
+  recognition.onstart = function () {
+    document.body.style.backgroundColor = 'red';
+    document.getElementById('speakbutton').style.display = 'none';
+    document.getElementById('speakbutton2').style.display = 'block';
+
+  };
+
+  recognition.onspeechend = function () {
+    recognition.stop();
+    document.body.style.backgroundColor = '#fff';
+  }
+
+
+
+
+  function similar_text(q, r) {
+    const f = q.replace(/\?/g, ' ').toLowerCase().trim();
+    const s = r.replace(/\?/g, ' ').toLowerCase().trim();
+
+    const similarityPercentage = calculateSimilarity(f, s);
+    console.log(Math.round(similarityPercentage));
+    return Math.round(similarityPercentage);
+  }
+  function calculateSimilarity(str1, str2) {
+    const maxLength = Math.max(str1.length, str2.length);
+    let commonChars = 0;
+
+    for (let i = 0; i < maxLength; i++) {
+      if (str1[i] === str2[i]) {
+        commonChars++;
+      }
+    }
+
+    return (commonChars / maxLength) * 100;
+  }
+
+
+  recognition.onresult = function (event) {
+    // console.log("I am in onresult.");
+
+    var d = document.getElementById('valuey').innerHTML;
+
+    var transcript = event.results[0][0].transcript;
+    var confidence = event.results[0][0].confidence;
+    // console.log(d);
+    // console.log(transcript);
+
+
+
+    // document.getElementById('other').innerHTML = "";
+
+    // var xmlhttp = new XMLHttpRequest();
+    // xmlhttp.onreadystatechange = function() {
+    // if (this.readyState == 4 && this.status == 200) {
+    var soham = similar_text(transcript, d);
+    var totalGain = document.getElementById("resultGain").innerHTML;
+    totalGain = parseInt(totalGain) + parseInt(soham);
+    console.log(totalGain);
+    document.getElementById("resultGain").innerHTML = totalGain;
+
+    speaks = [{ "name": "soham", "lang": "en-GB" },
+    { "name": "Google UK English Male", "lang": "en-US" }];
+
+    const mes = new SpeechSynthesisUtterance();
+    mes.volume = 1;
+    mes.rate = 1;
+    mes.pitch = 1;
+    mes.text = "Voice has been recorded";
+
+    const voice = speaks[1];
+    // console.log(`voice: ${voice.name} and lang : ${voice.lang}`);
+
+    mes.voiceURI = voice.name;
+    mes.lang = voice.lang;
+
+
+    speechSynthesis.speak(mes);
+
+  }
+  // };
+  // xmlhttp.open("GET", "responce.php?q=" + transcript + "&&r=" + d, true);
+  // xmlhttp.send();
+  // }
+
+  function soham() {
+    recognition.start();
+  }
+
+  function total_gain() {
+
+    totalGain = document.getElementById("resultGain").innerHTML;
+    var up = totalGain * 100;
+    var down = (arrString.length) * 100;
+
+    var GetYourResult = Math.round(up / down);
+    get = "result.html?r=" + GetYourResult;
+    const collection = document.getElementsByClassName("contentone");
+    for (let i = 0; i < collection.length; i++) {
+      collection[i].style.display = "none";
+    }
+    document.getElementsByClassName("resultshow")[0].style.display = "block";
+    document.getElementById("linkResult").setAttribute("href", get);
+  }
+</script>

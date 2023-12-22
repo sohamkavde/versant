@@ -9,6 +9,9 @@
     flex-wrap: wrap;
     min-height:30px
 }
+#speakbutton2{
+    display: none;
+}
 /* resultshow */
 .resultshow{
     display: none;
